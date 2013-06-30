@@ -1911,7 +1911,7 @@ public final class Settings {
          */
         public static final String MODE_RINGER_STREAMS_AFFECTED = "mode_ringer_streams_affected";
 
-        /**
+         /**
           * Determines which streams are affected by mute. The
           * stream type's bit should be set to 1 if it should be muted when a mute request
           * is received.
@@ -4402,6 +4402,7 @@ public final class Settings {
             SIP_CALL_OPTIONS,
             SIP_RECEIVE_CALLS,
             POINTER_SPEED,
+            VIBRATE_WHEN_RINGING
             QUIET_HOURS_ENABLED,
             QUIET_HOURS_START,
             QUIET_HOURS_END,
@@ -5916,6 +5917,19 @@ public final class Settings {
         public static final String WIMAX_ON = "wimax_on";
 
         /**
+         * Ethernet related configurations
+         */
+        public static final String ETHERNET_ON      = "ethernet_on";
+        public static final String ETHERNET_MODE    = "ethernet_mode";
+        public static final String ETHERNET_IP      = "ethernet_ip";
+        public static final String ETHERNET_MASK    = "ethernet_netmask";
+        public static final String ETHERNET_DNS     = "ethernet_dns";
+        public static final String ETHERNET_ROUTE   = "ethernet_iproute";
+        public static final String ETHERNET_CONF    = "ethernet_conf";
+        public static final String ETHERNET_IFNAME  = "ethernet_ifname";
+
+
+        /**
          * Whether background data usage is allowed.
          *
          * @deprecated As of {@link VERSION_CODES#ICE_CREAM_SANDWICH},
@@ -6354,9 +6368,8 @@ public final class Settings {
             UI_NIGHT_MODE,
             UI_INVERTED_MODE,
             LOCK_SCREEN_OWNER_INFO,
-            LOCK_SCREEN_OWNER_INFO_ENABLED,
+            LOCK_SCREEN_OWNER_INFO_ENABLED
             PRIVACY_GUARD_DEFAULT
-
         };
 
         /**

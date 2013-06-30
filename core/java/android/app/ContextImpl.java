@@ -1,7 +1,5 @@
 /*
  * Copyright (C) 2006 The Android Open Source Project
- * This code has been modified.  Portions copyright (C) 2012, ParanoidAndroid Project.
- * This code has been modified.  Portions copyright (C) 2010, T-Mobile USA, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,9 +28,9 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.IContentProvider;
-import android.content.IIntentReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.IIntentReceiver;
 import android.content.IntentSender;
 import android.content.ReceiverCallNotAllowedException;
 import android.content.ServiceConnection;
@@ -81,6 +79,8 @@ import android.net.wifi.p2p.IWifiP2pManager;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wimax.WimaxHelper;
 import android.net.wimax.WimaxManagerConstants;
+import android.net.ethernet.IEthernetManager;
+import android.net.ethernet.EthernetManager;
 import android.nfc.NfcManager;
 import android.os.Binder;
 import android.os.Bundle;
@@ -104,7 +104,9 @@ import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.telephony.TelephonyManager;
 import android.content.ClipboardManager;
-import android.util.*;
+import android.util.AndroidRuntimeException;
+import android.util.Log;
+import android.util.Slog;
 import android.view.CompatibilityInfoHolder;
 import android.view.ContextThemeWrapper;
 import android.view.WindowManager;
@@ -530,6 +532,13 @@ class ContextImpl extends Context {
                     IBinder b = ServiceManager.getService(WIFI_P2P_SERVICE);
                     IWifiP2pManager service = IWifiP2pManager.Stub.asInterface(b);
                     return new WifiP2pManager(service);
+                }});
+
+        registerService(ETHERNET_SERVICE, new ServiceFetcher() {
+                public Object createService(ContextImpl ctx) {
+                    IBinder b = ServiceManager.getService(ETHERNET_SERVICE);
+                    IEthernetManager service = IEthernetManager.Stub.asInterface(b);
+                    return new EthernetManager(service, ctx.mMainThread.getHandler());
                 }});
 
         registerService(WINDOW_SERVICE, new ServiceFetcher() {
